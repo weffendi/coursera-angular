@@ -14,12 +14,18 @@ function FoundItemsDirective() {
     scope: {
       items: '<',
       onRemove: '&'
-    }
+    },
+    controller: FoundItemsDirectiveController,
+    controllerAs: 'list',
+    bindToController: true
   };
 
   return ddo;
 }
 
+function FoundItemsDirectiveController() {
+  var list = this;
+}
 
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController(MenuSearchService) {
@@ -28,11 +34,25 @@ function NarrowItDownController(MenuSearchService) {
   list.found = [];
 
   list.narrowItDown = function() {
-    console.log(list.searchTerm);
-    list.found = MenuSearchService.getMatchedMenuItems(list.searchTerm);
+    var promise = MenuSearchService.getMatchedMenuItems(list.searchTerm);
+
+    promise.then(function (result) {
+      var foundItems = [];
+      var menu_items = result.data.menu_items;
+      var item = ""
+      for (var idx in menu_items) {
+         item = menu_items[idx];
+         if (item.description.search(list.searchTerm) != -1) {
+           foundItems.push(item);
+         };
+      }
+      list.found = foundItems;
+    });
   }
 
   list.removeItem = function (itemIndex) {
+    console.log("blah");
+    console.log("remove on index: ", itemIndex);
     list.found.splice(itemIndex, 1);
   };
 }
@@ -46,17 +66,8 @@ function MenuSearchService($http, ApiBasePath) {
     var response = $http({
       method: "GET",
       url: (ApiBasePath + "/menu_items.json")
-    }).then(function (result) {
-      var foundItems = [];
-      var menu_items = result.data.menu_items;
-      var item = ""
-      for (var idx in menu_items) {
-         item = menu_items[idx];
-         if (item.description.search(searchTerm) != -1) {
-           foundItems.push(item);
-         };
-      }
     });
+    return response;
   }
 }
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app='MenuApp'>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>No Cookie Shopping List</title>
+  </head>
+  <body>
+    <h1>Welcome Restaurant Menu Categories</h1>
+
+    <ui-view></ui-view>
+
+    <!-- Libraries -->
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-ui-router.min.js"></script>
+
+    <!-- Modules -->
+    <script src="src/menuapp/menuapp.module.js"></script>
+    <script src="src/data/data.module.js"></script>
+
+    <!-- Routes -->
+    <script src="src/routes.js"></script>
+
+    <!-- 'categories' module artifacts -->
+    <script src="src/data/menu-data.controller.js"></script>
+    <script src="src/data/menu-data.service.js"></script>
+    <script src="src/data/categories.controller.js"></script>
+    <script src="src/data/items.controller.js"></script>
+    <script src="src/data/categories.component.js"></script>
+    <script src="src/data/items.component.js"></script>
+  </body>
+</html>

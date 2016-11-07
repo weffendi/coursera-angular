@@ -1,0 +1,8 @@
+<h4>Selected Category Items :</h4>
+<ul>
+  <li ng-repeat="item in items.items">
+    {{ item.short_name }} : {{ item.name }} <br/> Description: {{ item.description }}<br/>
+    Price: {{ item.small_portion_name }} &#36{{ item.price_small }}
+           {{ item.large_portion_name }} &#36{{ item.price_large }}
+   </li>
+</ul>

@@ -1,0 +1,94 @@
+
+<div>
+  <h1 class="text-center">Sign Up Form</h1>
+     <fieldset>
+       <legend>Sign Up</legend>
+       <form name='signupForm' novalidate>
+         <div class="row">
+           <div class="col-xs-1"></div>
+           <div class="form-group col-xs-4">
+             <label for="fname">First name:</label>
+             <input type="text" class="form-control"
+             id="fname" name="firstname" placeholder="First Name"
+             ng-model="$ctrl.user.firstname"
+             required
+             minlength="2"
+             ng-maxlength="20">
+             <span class="alert-warning"
+               ng-if="(signupForm.firstname.$error.minlength || signupForm.firstname.$error.required) && signupForm.firstname.$touched">
+               firstname must be at least 2 characters long
+             </span>
+             <span ng-if="signupForm.firstname.$error.maxlength && signupForm.firstname.$touched">
+               firstname must not be longer than 20 characters
+             </span>
+           </div>
+           <div class="col-xs-1"></div>
+           <div class="form-group col-xs-4">
+             <label for="lname">Last name:</label>
+             <input type="text" class="form-control" id="lname" name="lastname" placeholder="Last Name"
+               ng-model="$ctrl.user.lastname"
+               required
+               minlength="2"
+               ng-maxlength="20">
+               <span class="alert-warning"
+                 ng-if="(signupForm.lastname.$error.minlength || signupForm.lastname.$error.required) && signupForm.lastname.$touched">
+                 lastname must be at least 2 characters long
+               </span>
+               <span class="alert-warning" ng-if="signupForm.lastname.$error.maxlength && signupForm.lastname.$touched">
+                 lastname must not be longer than 20 characters
+               </span>
+             </div>
+           </div>
+           <div class="row">
+             <div class="col-xs-1"></div>
+              <div class="form-group col-xs-4">
+                <label for="email">Email:</label>
+                 <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                   ng-model="$ctrl.user.email"
+                   required>
+                   <span class="alert-warning" ng-if="signupForm.email.$invalid && signupForm.email.$touched">
+                     Must be a valid email address: handle@domain format
+                   </span>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="form-group col-xs-4">
+             <label for="phone">Phone:</label>
+             <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone ###-###-####"
+               ng-model="$ctrl.user.phone"
+               pattern="(\d{3})-(\d{3})-(\d{4})">
+               <span class="alert-warning" ng-if="signupForm.phone.$invalid && signupForm.phone.$touched">
+                 Phone must be in the format ###-###-####.
+               </span>
+           </div>
+         </div>
+         <div class="row">
+         <div class="col-xs-1"></div>
+         <div class="form-group col-xs-4">
+           <label for="menuid">Favorite Dish menu number:</label>
+           <input type="text" class="form-control" name="favorite-dish" placeholder="(e.g. A11 or B16 or SP8 or SR43 or L28)"
+             ng-model="$ctrl.user.favmenuid">
+             <span class="alert-warning" ng-if="$ctrl.user.menuid_invalid">
+               No such menu number exists.
+             </span>
+           </div>
+         </div>
+         <div class="row">
+           <div class="col-xs-5"></div>
+         <button type="submit" class="btn btn-default"
+           ng-disabled="signupForm.$invalid"
+           ng-click="$ctrl.submit()">Submit</button>
+        </div>
+        <br/>
+        <div ng-if="$ctrl.user.completed" class="row">
+          <div class="col-xs-3"></div>
+           <div class="alert-success col-xs-4">
+             <span>
+               Your information has been saved.
+             </span>
+           </div>
+         </div>
+       </form>
+     </fieldset>
+</div>
